@@ -1,0 +1,9 @@
+//notice
+useParam() for when other page or components use id 
+[...slug] is only work for multi router array. is not working when call one array eg: /apple/orange/pi
+[[...slug]] is working both router array
+queryString parameter => /product?orderBy=apple => use SearchParams or useSearchparams
+
+//lib
+npm i -D daisyui@latest
+npm i fast-sort@1.2.4

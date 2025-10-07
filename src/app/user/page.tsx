@@ -1,7 +1,9 @@
 import React from "react";
-import ProductCard from "../components/ProductCard";
-import Card from "../components/Card";
 import Table from "../components/Table";
+import Link from "next/link";
+import { BiDownArrow } from "react-icons/bi";
+// @ts-ignore: fast-sort has types but package "exports" prevents resolution; ignore for now
+import { sort } from "fast-sort";
 
 interface userProps {
   id: number;
@@ -9,23 +11,64 @@ interface userProps {
   username: string;
   email: string;
 }
-const page = async () => {
+
+const page = async ({
+  searchParams,
+}: {
+  searchParams: { orderBy?: string };
+}) => {
+  const { orderBy } = await searchParams || {};
+
   const users: userProps[] = await fetch(
     "https://jsonplaceholder.typicode.com/users"
   ).then((users) => users.json());
 
+  const sorted: userProps[] = sort(users)
+  .asc(orderBy === "name" ? 
+    (user: userProps) => user.name : 
+    (user: userProps) => user.email
+  );
+  // console.log("sorted", sorted);
   return (
-    <div className="flex w-full h-screen bg-blue-100">
-      <div className="mx-auto container flexflex-col bg-amber-300 justify-center items-center">
-        <div className="flex justify-center">
-          <div className="grid grid-cols-1 justify-center gap-5">
-            {users.map((user) => (
-
-              <Card key={user.id} id={user.id} name={user.name} />
-            ))}
-          </div>
-        </div>
-      </div>
+    <div>
+      <Link href={"/user/create"} className="btn btn-primary rounded mb-2">
+        Create
+      </Link>
+      <table className="table table-zebra">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>
+              <Link
+                className="flex items-center space-x-2"
+                href={"/user?orderBy=name"}
+              >
+                <BiDownArrow />
+                <span>Name</span>
+              </Link>
+            </th>
+            <th className="items-center">
+              <Link
+                className="flex items-center space-x-2"
+                href={"/user?orderBy=email"}
+              >
+                <BiDownArrow />
+                <span>Email</span>
+              </Link>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((user) => (
+            <Table
+              key={user.id}
+              id={user.id}
+              name={user.name}
+              email={user.email}
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

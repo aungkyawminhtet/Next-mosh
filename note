@@ -4,6 +4,14 @@ useParam() for when other page or components use id
 [[...slug]] is working both router array
 queryString parameter => /product?orderBy=apple => use SearchParams or useSearchparams
 
+server and client အတွက် next components သုံးဖို့ နှစ်ခုလုံးရှိတယ်။ eg: useRouter က cient မှာသုံးရတယ်။ Link က Server request မှာသုံးရတယ်။ other eg: params{id} == useParams();
+
+suspense is used for when fetching data to sever.like loading. eg: <suspense callback={<p>Loading...</p>}></suspense>
+
+not-found.tsx or notFound();
+
 //lib
 npm i -D daisyui@latest
 npm i fast-sort@1.2.4
+npm i react-icons
+

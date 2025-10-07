@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 // @ts-ignore - side-effect CSS import without typings
-import './globals.css';
+import "./globals.css";
+import Navbar from "./Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme='winter'>
+    <html lang="en" data-theme="winter">
       <body>
-        {children}
+        <Navbar />
+        <main>{children}</main>
       </body>
     </html>
   );

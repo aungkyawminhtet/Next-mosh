@@ -1,21 +1,26 @@
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 import { userSchema } from "./schema";
+import { prisma } from "../../../../prisma/client";
 
 export async function GET(request: NextRequest) {
-  return NextResponse.json({
-    id: 1,
-    name: "ak",
-  });
+  const users = await prisma.user.findMany();
+  // console.log("object", users);
+  return NextResponse.json(users);
 }
 
 export async function POST(request: NextRequest) {
-  const data = await request.json();
+  const body = await request.json();
 
-  const validation = userSchema.safeParse(data);
-  if(!validation.success) return NextResponse.json(validation.error, {status: 400})
+  const validation = userSchema.safeParse(body);
+  if (!validation.success)
+    return NextResponse.json(validation.error, { status: 400 });
 
-  return NextResponse.json({
-    data,
+  const user = await prisma.user.create({
+    data: {
+      name: body.name,
+      email: body.email,
+    },
   });
+
+  return NextResponse.json(user, { status: 200 });
 }

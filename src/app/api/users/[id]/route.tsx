@@ -1,49 +1,55 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "../../../../../prisma/client";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: number } }
+  { params }: { params: { id: string } }
 ) {
   const { id } = await params;
-  if (id > 20)
-    return NextResponse.json(
-      {
-        error: "Id should be less than 20",
-      },
-      { status: 400 }
-    );
 
-  return NextResponse.json({
-    id,
-    name: "ak",
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(id) },
   });
+
+  return NextResponse.json(user, { status: 200 });
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: number } }
+  { params }: { params: { id: string } }
 ) {
   const body = await request.json();
   const { id } = await params;
-  if (!body.name)
-    return NextResponse.json(
-      {
-        error: "Name is required",
-      },
-      { status: 400 }
-    );
-  if (id > 10)
-    return NextResponse.json(
-      {
-        error: "Id should be less than 10",
-      },
-      { status: 400 }
-    );
-  return NextResponse.json(
-    {
-      id,
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(id) },
+  });
+  if (!user)
+    return NextResponse.json({ msg: "User not found" }, { status: 404 });
+
+  const updatedUser = await prisma.user.update({
+    where: { id: user.id },
+    data: {
       name: body.name,
+      email: body.email,
     },
-    { status: 200 }
-  );
+  });
+  return NextResponse.json(updatedUser, { status: 200 });
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const { id } = await params;
+  const user = await prisma.user.findUnique({
+    where: {
+      id: parseInt(id),
+    },
+  });
+  if (!user)
+    return NextResponse.json({ msg: "User not found" }, { status: 404 });
+  await prisma.user.delete({
+    where: { id: parseInt(id) },
+  });
+  return NextResponse.json({ msg: "User deleted" }, { status: 200 });
 }

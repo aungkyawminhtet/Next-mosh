@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import Button from "./components/Button";
-export default function Home() {
+export default function Home() {  
   return (
     <div className="flex flex-col justify-center items-center h-screen gap-7">
       <h1>Home page</h1>
+      {/* <h1>Name is - {session.user!.name}</h1> */}
       <Link href={"/user"}>
         <Button title="User" />
       </Link>

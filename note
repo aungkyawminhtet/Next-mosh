@@ -23,6 +23,7 @@ npm i react-icons
 npm i zod
 npm install @prisma/client
 npm i next-cloudinary
+npm install next-auth
 
 //prisma usage
 npx prisma => see all prisma commands
@@ -31,6 +32,7 @@ npx prisma format => format prisma file
 npx prisma migrate dev => migrate prisma file
 npx prisma generate
 npx prisma db push
+
 
 //prisma find data
 prisma.users.findMany => find all data
@@ -53,3 +55,8 @@ docker run -d --name mosh-mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=mo
 //cloudinary usage
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="<Your Cloud Name>"
 NEXT_PUBLIC_CLOUDINARY_API_KEY="<Your API Key>"
+https://demo.cloudinary.com/uw/#/     => to edit custom tools
+
+
+//random generate Key
+openssl rand -base64 32

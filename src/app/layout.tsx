@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 // @ts-ignore - side-effect CSS import without typings
 import "./globals.css";
 import Navbar from "./Navbar";
+import AuthProvider from "./auth/provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="winter">
       <body>
-        <Navbar />
-        <main>{children}</main>
+        <AuthProvider>
+          <Navbar />
+          <main>{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );

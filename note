@@ -24,6 +24,7 @@ npm i zod
 npm install @prisma/client
 npm i next-cloudinary
 npm install next-auth
+npm i -D @types/bcrypt
 
 //prisma usage
 npx prisma => see all prisma commands
@@ -32,6 +33,7 @@ npx prisma format => format prisma file
 npx prisma migrate dev => migrate prisma file
 npx prisma generate
 npx prisma db push
+npm i react-email @react-email/components
 
 
 //prisma find data
@@ -60,3 +62,13 @@ https://demo.cloudinary.com/uw/#/     => to edit custom tools
 
 //random generate Key
 openssl rand -base64 32
+
+
+//middleware parameter
+* : zero or more
++ : one or more
+? : zero or one
+
+//bcrypt usage
+bcrypt.hash(password, 10) => to hash password
+bcrypt.compare(password, user.password) => to compare password

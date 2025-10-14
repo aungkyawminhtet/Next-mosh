@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 // @ts-ignore - side-effect CSS import without typings
 import "./globals.css";
 import Navbar from "./Navbar";
-import AuthProvider from "./auth/provider";
+import AuthProvider from "./authProvider/Provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",

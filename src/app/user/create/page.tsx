@@ -11,7 +11,7 @@ const page = () => {
     <div>
       <button onClick={handleClick} className='btn btn-primary rounded'>Back</button>
     </div>
-  )
+  );
 }
 
 export default page

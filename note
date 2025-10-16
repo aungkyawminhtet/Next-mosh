@@ -34,7 +34,7 @@ npx prisma migrate dev => migrate prisma file
 npx prisma generate
 npx prisma db push
 npm i react-email @react-email/components
-
+npm install resend
 
 //prisma find data
 prisma.users.findMany => find all data
@@ -72,3 +72,41 @@ openssl rand -base64 32
 //bcrypt usage
 bcrypt.hash(password, 10) => to hash password
 bcrypt.compare(password, user.password) => to compare password
+
+
+//external image , add in next.config.js
+usagemodule.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.example.com',
+        port: '',
+        search: '',
+      },
+    ],
+  },
+}
+//image parameter
+<Image src="/me.png" alt="Picture of the author" width={} fill objectFit="cover or contain" height={} priority quality={100} />
+
+
+//google analytics script
+<Script
+strategy="afterInteractive"
+src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+/>
+       
+<Script
+  id="google-analytics"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+    page_path: window.location.pathname,
+    });
+  `,
+}}/>

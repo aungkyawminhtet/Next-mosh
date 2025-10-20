@@ -3,9 +3,9 @@ import { prisma } from "../../../../../prisma/client";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+   context : {params : Promise<{id: string}>}
 ) {
-  const { id } = await params;
+  const { id } = await context.params;
 
   const user = await prisma.user.findUnique({
     where: { id: id },
@@ -16,10 +16,10 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: {params : Promise<{id: string}>}
 ) {
   const body = await request.json();
-  const { id } = await params;
+  const { id } = await context.params;
   const user = await prisma.user.findUnique({
     where: { id: id },
   });
@@ -38,9 +38,9 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+ context: {params: Promise<{id: string}>}
 ) {
-  const { id } = await params;
+  const { id } = await context.params;
   const user = await prisma.user.findUnique({
     where: {
       id,

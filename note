@@ -25,6 +25,7 @@ npm install @prisma/client
 npm i next-cloudinary
 npm install next-auth
 npm i -D @types/bcrypt
+npm i -D @types/lodash
 
 //prisma usage
 npx prisma => see all prisma commands
@@ -110,3 +111,27 @@ src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_I
     });
   `,
 }}/>
+
+//metaData example
+//single page
+export const metedata: Metadata = {
+  title: "Service Page",
+  description: "This is service page",
+}
+
+//dynamic page
+export async function generateMetadata({params}: Props): Promise<Metadata>{
+  const data = await fetch('');
+  const title = data.name || "Service Page";
+  return {
+    title: title,
+    description: "This is service page"
+  }
+}
+
+//dynamic usage
+import dynamic from 'next/dynamic';
+const HeavyComponent = dynamic(() => import('../components/HeavyComponent'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>
+});

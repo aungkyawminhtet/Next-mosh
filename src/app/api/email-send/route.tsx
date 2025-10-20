@@ -10,5 +10,5 @@ export async function POST(request: NextRequest){
         to: 'aung244348@gmail.com',
         subject: 'Welcome to my AK Email',
         react: <WelcomeTextTemplate name="Aung Kyaw" />
-    })
+    });
 }

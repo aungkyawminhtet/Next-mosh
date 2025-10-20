@@ -2,11 +2,11 @@
 // import { useParams } from 'next/navigation'
 import React from 'react'
 
-const page = ({params: {id}}: {params: {id : string}}) => {
+const page = () => {
     // const {id} = useParams();
   return (
     <div>
-      <h1>User id is - {id}</h1>
+      <h1>User id is </h1>
     </div>
   )
 }

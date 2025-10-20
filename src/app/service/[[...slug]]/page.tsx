@@ -2,7 +2,6 @@
 // import { useParams } from 'next/navigation'
 import React, { useState } from 'react'
 import { getServerSession } from "next-auth";
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Metadata } from 'next';
 import HeavyComponent from '@/app/components/HeavyComponent';
 import dynamic from 'next/dynamic';

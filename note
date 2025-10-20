@@ -135,3 +135,13 @@ const HeavyComponent = dynamic(() => import('../components/HeavyComponent'), {
   ssr: false,
   loading: () => <p>Loading...</p>
 });
+
+//.env example
+DATABASE_URL="mysql://root:root@localhost:3307/moshdb"
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRECT=gyHSzH3cCzG9xML4wEtgcZJrsTnOa3q1SEDoCc8DIVU=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRECT=
+RESEND_API_KEY=
+NEXT_PUBLIC_GA_ID=G-1X6Z3EJ6X1
